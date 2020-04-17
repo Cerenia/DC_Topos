@@ -1,9 +1,9 @@
 # DC_Topos
 
-This is a collection of scalable datacentre topologies. This project is mainly intended for people doing research or teaching. But a handy command line client gives easy access for people who are simply curious about the structure of these networks to generate PDFs. 
+This is a collection of scalable datacentre topologies. This project is mainly intended for people doing research or teaching. A handy command line client gives easy access for people who are simply curious about the structure of these networks, and generates a visualisation in PDF format. 
 
-Each topology object can create a Networkx DiGraph which represents an instance of this topology which in turn can be printed to a PDF for visualisation. Additionally we implemented the possibility to pass a capacity function to the topologies to set link capacities throughout the network. The function takes two switch IDs as an argument, representing the link to set, and should output a floating point number for the capacity value.
-The topologies are constructed from bottom to top, the first layer always being the top of rack layer. The lowest switch IDs will therefore be in the TOR-layer and work their way up in the connecting layers. The switch IDs are stored in internal ranges per layer to make everything more legible. Instantiate some topologies to get a better feel for it.
+Each topology object can create a Networkx DiGraph which represents an instance of this topology. These instances can in turn be visualized in PDF format. Additionally, we implemented the possibility to pass a function to the topologies to set link capacities throughout the network. The function takes two switch IDs as an argument&emdash;defining the link through the node IDs on each end&emdash;and should output a floating point number for the capacity value.
+The topologies are constructed from bottom to top, the first layer always being the top of rack (TOR) layer. The lowest switch IDs will therefore be in the TOR-layer and work their way up in the connecting layers. We define internal ranges per layer that hold the switch IDs to make everything more legible. Instantiate some topologies to get a better feel for it.
 
 This code runs with python version 3.
 
@@ -20,7 +20,7 @@ To instantiate a topology pass the chosen arguments. E.g:
 ```
 python cli.py Fabric 3 2 --n_p 4 --p_c 8
 ```
-This will result in a pdf drawing of the topology instance appearing in the Code folder.
+This will result in a drawing of the topology instance appearing in the Code folder as a PDF.
 
 ## Mid Level API
 
@@ -28,7 +28,7 @@ If you want to use the topologies as building blocks for other things, you can s
 
 ### Partial drawings
 
-The visualiser is able to handle partial graphs. To do this you can trim the Networkx graph and pass the updated graph to the ".draw_topology()" function.
+The visualiser is able to handle partial graphs. To do this you can trim the Networkx graph and pass the updated graph to the `draw_topology()` function.
 ```
     import networkx as nx
     from DC_Topos.Topologies.fatTree import FatTree
@@ -44,7 +44,7 @@ This piece of code draws the first pod of FatTree(8) and appends "-first_pod" to
 
 ### Capacity function
 
-You can pass a capacity function as the last argument in each topology constructor. This method must takes two switch IDs as the argument (and optionally a topology object as third argument making it possible to access the switch ID ranges directly) and return a floating point number representing the capacity on this link. 
+You can pass a function as the last argument in each topology constructor. This function is used to set the link capacities and must takes two switch IDs as the argument (and optionally a topology object as third argument making it possible to access the switch ID ranges directly) and return a floating point number representing the capacity on this link. 
 ```
     from DC_Topos.Topologies.fatTree import FatTree
     def capacity(s1, s2):
@@ -76,5 +76,5 @@ Note that the capacities appear in the generated PDFs.
 
 You are very welcome to contribute more topologies to this project! Please make sure to stick to the same style for the topologies.
 - Build switch index ranges in the main topology object
-- Implement the "gen_graph()" method on the topology which returns a networkx DiGraph
-- Implement the "set_node_positions()" method on the topology needed for visualisation
+- Implement the `gen_graph()` method on the topology which returns a networkx DiGraph
+- Implement the `set_node_positions()` method on the topology needed for visualisation
