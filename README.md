@@ -2,7 +2,7 @@
 
 This is a collection of scalable datacentre topologies. This project is mainly intended for people doing research or teaching. A handy command line client gives easy access for people who are simply curious about the structure of these networks, and generates a visualisation in PDF format. 
 
-Each topology object can create a Networkx DiGraph which represents an instance of this topology. These instances can in turn be visualized in PDF format. Additionally, we implemented the possibility to pass a function to the topologies to set link capacities throughout the network. The function takes two switch IDs as an argument&emdash;defining the link through the node IDs on each end&emdash;and should output a floating point number for the capacity value.
+Each topology object can create a Networkx DiGraph which represents an instance of this topology. These instances can in turn be visualized in PDF format. Additionally, we implemented the possibility to pass a function to the topologies to set link capacities throughout the network. The function takes two switch IDs as an argument—defining the link through the node IDs on each end—and should output a floating point number for the capacity value.
 The topologies are constructed from bottom to top, the first layer always being the top of rack (TOR) layer. The lowest switch IDs will therefore be in the TOR-layer and work their way up in the connecting layers. We define internal ranges per layer that hold the switch IDs to make everything more legible. Instantiate some topologies to get a better feel for it.
 
 This code runs with python version 3.
